@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.SpinnerValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.StudentDashboardController"
+            styleClass="main-container">
+    
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar">
+            <padding>
+                <Insets top="20.0" right="10.0" bottom="20.0" left="10.0"/>
+            </padding>
+            <VBox alignment="CENTER" spacing="30.0">
+                <!-- Navigation Icons -->
+                <FontIcon fx:id="homeIcon" iconLiteral="fas-home" iconSize="24" styleClass="sidebar-icon-active" onMouseClicked="#showDashboard"/>
+                <FontIcon fx:id="assessmentIcon" iconLiteral="fas-clipboard-list" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showAssessments"/>
+                <FontIcon fx:id="practiceIcon" iconLiteral="fas-dumbbell" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showPracticeTests"/>
+                <FontIcon fx:id="contributionIcon" iconLiteral="fas-lightbulb" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showContributions"/>
+                <FontIcon fx:id="analyticsIcon" iconLiteral="fas-chart-line" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showAnalytics"/>
+                <FontIcon fx:id="settingsIcon" iconLiteral="fas-cog" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showSettings"/>
+                <VBox.margin>
+                    <Insets top="40.0"/>
+                </VBox.margin>
+            </VBox>
+            <Region VBox.vgrow="ALWAYS"/>
+            <FontIcon fx:id="logoutIcon" iconLiteral="fas-sign-out-alt" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#handleLogout"/>
+        </VBox>
+    </left>
+    
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Dashboard Content (Units View) -->
+            <VBox fx:id="dashboardContent" spacing="20.0" visible="true">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header with Welcome Text, Date/Time, and Enroll Button -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Text fx:id="welcomeText" text="Welcome, Student" styleClass="welcome-text"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox alignment="CENTER_RIGHT" spacing="5.0">
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                            <Label text="Date/Time:"/>
+                            <Label fx:id="dateTimeLabel" text="2025-03-22 10:00:00"/>
+                        </HBox>
+                        <Button fx:id="enrollUnitButton" text="Enroll in New Units" styleClass="primary-button"/>
+                    </VBox>
+                </HBox>
+                
+                <Label text="My Enrolled Units" styleClass="section-title"/>
+                <GridPane fx:id="unitsGrid" hgap="20.0" vgap="20.0">
+                    <!-- Unit cards will be added here dynamically -->
+                </GridPane>
+            </VBox>
+            
+            <!-- Assessments Content -->
+            <VBox fx:id="assessmentsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <Label text="Formal Assessments" styleClass="section-title"/>
+                <Label text="View and take formal assessments assigned by your lecturers." styleClass="section-description"/>
+                
+                <!-- Unit Filter -->
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Filter by Unit:"/>
+                    <ComboBox fx:id="assessmentUnitFilter" prefWidth="200.0" promptText="All Units"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="assessmentStatusFilter" prefWidth="150.0" promptText="All Assessments"/>
+                </HBox>
+                
+                <!-- Assessments Table -->
+                <TableView fx:id="assessmentsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="assessmentTitleColumn" text="Title" prefWidth="150.0"/>
+                        <TableColumn fx:id="assessmentUnitColumn" text="Unit" prefWidth="100.0"/>
+                        <TableColumn fx:id="assessmentStartColumn" text="Start Date" prefWidth="150.0"/>
+                        <TableColumn fx:id="assessmentEndColumn" text="End Date" prefWidth="150.0"/>
+                        <TableColumn fx:id="assessmentDurationColumn" text="Duration" prefWidth="100.0"/>
+                        <TableColumn fx:id="assessmentStatusColumn" text="Status" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+                
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <Button fx:id="viewAssessmentButton" text="View Details" styleClass="secondary-button" disable="true"/>
+                    <Button fx:id="takeAssessmentButton" text="Take Assessment" styleClass="primary-button" disable="true"/>
+                    <Button fx:id="downloadAssessmentButton" text="Download for Offline" styleClass="secondary-button" disable="true"/>
+                </HBox>
+            </VBox>
+            
+            <!-- Practice Tests Content -->
+            <VBox fx:id="practiceContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <Label text="Practice Tests" styleClass="section-title"/>
+                <Label text="Create and take practice tests to prepare for your assessments. You'll receive immediate feedback after completion." styleClass="section-description"/>
+                
+                <!-- Create Practice Test Form - Fixed Layout -->
+                <VBox spacing="15.0" styleClass="form-container">
+                    <Label text="Create New Practice Test" styleClass="form-title"/>
+                    <GridPane hgap="15.0" vgap="15.0">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="150.0" />
+                            <ColumnConstraints minWidth="300.0" />
+                        </columnConstraints>
+                        
+                        <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="practiceTitleField" promptText="Enter a title for your practice test" 
+                                  GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Unit:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="practiceUnitComboBox" prefWidth="300.0" promptText="Select a unit" 
+                                 GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Topics:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <HBox spacing="5.0" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <StackPane fx:id="topicSelectionContainer" prefWidth="300.0" />
+                        </HBox>
+                        
+                        <Label text="Difficulty:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="practiceDifficultyComboBox" prefWidth="300.0" promptText="Select difficulty" 
+                                 GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Question Type:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="practiceQuestionTypeComboBox" prefWidth="300.0" promptText="Select question type" 
+                                 GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Number of Questions:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Spinner fx:id="practiceQuestionCountSpinner" prefWidth="300.0"
+                                GridPane.rowIndex="5" GridPane.columnIndex="1">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="5" max="50" initialValue="10" amountToStepBy="1"/>
+                            </valueFactory>
+                        </Spinner>
+                        
+                        <Label text="Duration (minutes):" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <Spinner fx:id="practiceDurationSpinner" prefWidth="300.0"
+                                GridPane.rowIndex="6" GridPane.columnIndex="1">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="5" max="120" initialValue="30" amountToStepBy="5"/>
+                            </valueFactory>
+                        </Spinner>
+                        
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.rowIndex="7" GridPane.columnIndex="1">
+                            <Button fx:id="createPracticeButton" text="Create Practice Test" styleClass="primary-button"/>
+                        </HBox>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Unit Filter -->
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Filter by Unit:"/>
+                    <ComboBox fx:id="practiceUnitFilter" prefWidth="200.0" promptText="All Units"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="practiceStatusFilter" prefWidth="150.0" promptText="All Practice Tests"/>
+                </HBox>
+                
+                <!-- Practice Assessments Table -->
+                <TableView fx:id="practiceTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="practiceTitleColumn" text="Title" prefWidth="150.0"/>
+                        <TableColumn fx:id="practiceUnitColumn" text="Unit" prefWidth="100.0"/>
+                        <TableColumn fx:id="practiceScoreColumn" text="Score (%)" prefWidth="100.0"/>
+                        <TableColumn fx:id="practiceGradeColumn" text="Grade" prefWidth="80.0"/>
+                        <TableColumn fx:id="practiceStatusColumn" text="Status" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+                
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <Button fx:id="viewPracticeButton" text="View Details" styleClass="secondary-button" disable="true"/>
+                    <Button fx:id="takePracticeButton" text="Take Practice Test" styleClass="primary-button" disable="true"/>
+                </HBox>
+            </VBox>
+            
+            <!-- Contributions Content -->
+            <VBox fx:id="contributionsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <Label text="Question Contributions" styleClass="section-title"/>
+                <Label text="Contribute questions to help build the question bank." styleClass="section-description"/>
+                
+                <!-- Create Question Form -->
+                <VBox spacing="15.0">
+                    <GridPane hgap="10.0" vgap="10.0">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="150.0" />
+                            <ColumnConstraints minWidth="300.0" />
+                        </columnConstraints>
+                        
+                        <Label text="Unit:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="contributionUnitComboBox" prefWidth="300.0" promptText="Select a unit" 
+                                 GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Question Type:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="contributionQuestionTypeComboBox" prefWidth="300.0" promptText="Select question type" 
+                                 GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Difficulty:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="contributionDifficultyComboBox" prefWidth="300.0" promptText="Select difficulty" 
+                                 GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Topic:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="contributionTopicComboBox" prefWidth="300.0" promptText="Select a topic for this question" 
+                                  GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Question Text:" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.valignment="TOP">
+                            <GridPane.margin>
+                                <Insets top="5.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <TextArea fx:id="contributionQuestionTextField" prefHeight="100.0" promptText="Enter your question here" 
+                                 GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Marks:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Spinner fx:id="contributionMarksSpinner" min="1" max="20" initialValue="5" 
+                                GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                        
+                        <Label fx:id="optionsLabel" text="Options:" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.valignment="TOP">
+                            <GridPane.margin>
+                                <Insets top="5.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <VBox fx:id="contributionOptionsVBox" spacing="10.0" GridPane.rowIndex="6" GridPane.columnIndex="1">
+                            <Label text="Enter your options below. Select the radio button next to the correct answer." wrapText="true" />
+                            <VBox fx:id="optionsContainer" spacing="5.0">
+                                <!-- Options will be added here dynamically -->
+                            </VBox>
+                            <Button fx:id="addOptionButton" text="Add Another Option" styleClass="secondary-button" />
+                        </VBox>
+                        
+                        <Label fx:id="correctAnswerLabel" text="Correct Answer:" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.valignment="TOP">
+                            <GridPane.margin>
+                                <Insets top="5.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <VBox fx:id="contributionAnswersVBox" spacing="5.0" GridPane.rowIndex="7" GridPane.columnIndex="1">
+                            <HBox spacing="5.0">
+                                <TextField fx:id="contributionAnswerField" promptText="Add correct answer" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="addAnswerButton" text="Add" styleClass="secondary-button"/>
+                            </HBox>
+                            <ListView fx:id="contributionAnswersList" prefHeight="100.0"/>
+                        </VBox>
+                    </GridPane>
+                    
+                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <Button fx:id="clearContributionButton" text="Clear Form" styleClass="secondary-button"/>
+                        <Button fx:id="submitQuestionButton" text="Submit Question" styleClass="primary-button"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Analytics Content -->
+            <VBox fx:id="analyticsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <Label text="Performance Analytics" styleClass="section-title"/>
+                <Text styleClass="section-description" wrappingWidth="800">
+                    View your performance across all assessments and practice tests.
+                </Text>
+                
+                <TabPane fx:id="analyticsTabPane" VBox.vgrow="ALWAYS" styleClass="analytics-tabs">
+                    <Tab text="Overview" closable="false">
+                        <VBox spacing="20.0">
+                            <HBox spacing="20.0" alignment="CENTER">
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Average Score" styleClass="analytics-card-title"/>
+                                    <Label fx:id="averageScoreLabel" text="0%" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Assessments Completed" styleClass="analytics-card-title"/>
+                                    <Label fx:id="assessmentsCompletedLabel" text="0" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Practice Tests Completed" styleClass="analytics-card-title"/>
+                                    <Label fx:id="practiceTestsCompletedLabel" text="0" styleClass="analytics-card-value"/>
+                                </VBox>
+                            </HBox>
+                            <VBox styleClass="chart-container" VBox.vgrow="ALWAYS">
+                                <Label text="Performance Trend" styleClass="chart-title"/>
+                                <StackPane fx:id="performanceTrendChartContainer" VBox.vgrow="ALWAYS"/>
+                            </VBox>
+                        </VBox>
+                    </Tab>
+                    <Tab text="Formal Tests" closable="false">
+                        <VBox spacing="20.0">
+                            <HBox spacing="20.0" alignment="CENTER">
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Average Score" styleClass="analytics-card-title"/>
+                                    <Label fx:id="formalTestsAvgScoreLabel" text="0%" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Highest Score" styleClass="analytics-card-title"/>
+                                    <Label fx:id="formalTestsHighestScoreLabel" text="0%" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Tests Completed" styleClass="analytics-card-title"/>
+                                    <Label fx:id="formalTestsCompletedLabel" text="0" styleClass="analytics-card-value"/>
+                                </VBox>
+                            </HBox>
+                            <TableView fx:id="formalTestsTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="formalTestUnitColumn" text="Unit" prefWidth="100.0"/>
+                                    <TableColumn fx:id="formalTestTitleColumn" text="Title" prefWidth="200.0"/>
+                                    <TableColumn fx:id="formalTestScoreColumn" text="Score" prefWidth="100.0"/>
+                                    <TableColumn fx:id="formalTestDateColumn" text="Date" prefWidth="150.0"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </Tab>
+                    <Tab text="Practice Tests" closable="false">
+                        <VBox spacing="20.0">
+                            <HBox spacing="20.0" alignment="CENTER">
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Average Score" styleClass="analytics-card-title"/>
+                                    <Label fx:id="practiceTestsAvgScoreLabel" text="0%" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Highest Score" styleClass="analytics-card-title"/>
+                                    <Label fx:id="practiceTestsHighestScoreLabel" text="0%" styleClass="analytics-card-value"/>
+                                </VBox>
+                                <VBox styleClass="analytics-card" HBox.hgrow="ALWAYS">
+                                    <Label text="Tests Completed" styleClass="analytics-card-title"/>
+                                    <Label fx:id="practiceTestsCompletedLabel2" text="0" styleClass="analytics-card-value"/>
+                                </VBox>
+                            </HBox>
+                            <TableView fx:id="practiceTestsAnalyticsTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="practiceTestUnitColumn" text="Unit" prefWidth="100.0"/>
+                                    <TableColumn fx:id="practiceTestTitleColumn" text="Title" prefWidth="200.0"/>
+                                    <TableColumn fx:id="practiceTestScoreColumn" text="Score" prefWidth="100.0"/>
+                                    <TableColumn fx:id="practiceTestDateColumn" text="Date" prefWidth="150.0"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </VBox>
+            
+            <!-- Settings Content -->
+            <VBox fx:id="settingsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <Label text="Settings" styleClass="section-title"/>
+                <Label text="Update your profile and password." styleClass="section-description"/>
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150.0" />
+                        <ColumnConstraints minWidth="300.0" />
+                    </columnConstraints>
+                    
+                    <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="fullNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="emailField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Current Password:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="currentPasswordField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    
+                    <Label text="New Password:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="newPasswordField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Confirm Password:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="confirmPasswordField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    
+                    <Button fx:id="saveSettingsButton" text="Save Changes" styleClass="primary-button" 
+                            GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+                </GridPane>
+            </VBox>
+        </StackPane>
+    </center>
+    
+    <!-- Status Bar -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="status-bar">
+            <padding>
+                <Insets top="5.0" right="10.0" bottom="5.0" left="10.0"/>
+            </padding>
+            <Label fx:id="statusLabel" text="Ready"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="versionLabel" text="Version 1.0"/>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.AssessmentResultsController"
+            prefHeight="600.0" prefWidth="800.0"
+            styleClass="results-container">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    
+    <top>
+        <VBox spacing="15.0">
+            <Label fx:id="assessmentTitleLabel" styleClass="title-label">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            
+            <HBox spacing="20.0" alignment="CENTER">
+                <VBox alignment="CENTER" styleClass="score-box">
+                    <Label text="Score" styleClass="score-label"/>
+                    <Label fx:id="scoreLabel" styleClass="score-value"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" styleClass="percentage-box">
+                    <Label text="Percentage" styleClass="percentage-label"/>
+                    <Label fx:id="percentageLabel" styleClass="percentage-value"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" styleClass="grade-box">
+                    <Label text="Grade" styleClass="grade-label"/>
+                    <Label fx:id="gradeLabel" styleClass="grade-value"/>
+                </VBox>
+            </HBox>
+            
+            <Separator/>
+        </VBox>
+    </top>
+    
+    <center>
+        <TabPane>
+            <Tab text="Summary" closable="false">
+                <VBox spacing="10.0">
+                    <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="questionColumn" text="Question" prefWidth="300.0"/>
+                            <TableColumn fx:id="yourAnswerColumn" text="Your Answer" prefWidth="150.0"/>
+                            <TableColumn fx:id="correctAnswerColumn" text="Correct Answer" prefWidth="150.0"/>
+                            <TableColumn fx:id="marksColumn" text="Marks" prefWidth="100.0"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            
+            <Tab text="Detailed Feedback" closable="false">
+                <VBox fx:id="feedbackContainer" spacing="10.0">
+                    <Label text="Question Details and Feedback" styleClass="section-title"/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <Accordion fx:id="questionAccordion"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <padding>
+                <Insets top="10.0"/>
+            </padding>
+            <Button fx:id="closeButton" text="Close" styleClass="primary-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

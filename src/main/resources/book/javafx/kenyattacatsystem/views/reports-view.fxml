@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="reportsContainer" spacing="15" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="book.javafx.kenyattacatsystem.controllers.ReportsViewController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Report Type:" />
+        <ComboBox fx:id="reportTypeComboBox" prefWidth="200" />
+        <Label text="Unit:" />
+        <ComboBox fx:id="unitSelector" prefWidth="200" />
+        <Button text="Generate Report" onAction="#handleGenerateReport" styleClass="primary-button" />
+    </HBox>
+    
+    <VBox spacing="10">
+        <Text text="Generated Reports" styleClass="section-header" />
+        <TableView fx:id="reportsTableView" VBox.vgrow="ALWAYS" prefHeight="400">
+            <!-- Columns will be added programmatically -->
+        </TableView>
+    </VBox>
+</VBox>

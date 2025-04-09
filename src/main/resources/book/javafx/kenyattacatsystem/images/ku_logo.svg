@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="55" fill="#3498db" />
+  
+  <!-- Graduation Cap -->
+  <path d="M60 30 L25 45 L60 60 L95 45 Z" fill="white" />
+  <path d="M40 50 L40 70 L60 80 L80 70 L80 50" fill="white" stroke="white" stroke-width="2" fill-opacity="0.8" />
+  <rect x="58" y="25" width="4" height="15" fill="white" />
+  <circle cx="60" cy="22" r="5" fill="white" />
+  
+  <!-- Text -->
+  <path d="M30 85 Q60 95, 90 85" fill="none" stroke="white" stroke-width="2" />
+  <text x="60" y="90" font-family="Arial" font-size="10" fill="white" text-anchor="middle" font-weight="bold">KENYATTA UNIVERSITY</text>
+</svg>

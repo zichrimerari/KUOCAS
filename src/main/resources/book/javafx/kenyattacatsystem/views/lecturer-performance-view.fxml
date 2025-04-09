@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/analytics-styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="book.javafx.kenyattacatsystem.controllers.LecturerPerformanceController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="800.0" spacing="10.0" styleClass="header-box">
+               <children>
+                  <Label styleClass="page-title" text="Unit Performance Analytics">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Select Unit:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="unitComboBox" prefWidth="150.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </HBox>
+            <TabPane fx:id="performanceTabPane" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <!-- Overview Tab -->
+                <Tab text="Overview">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="521.0" prefWidth="800.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="780.0" spacing="20.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="246.0" styleClass="stat-box">
+                                             <children>
+                                                <Label text="Average Score" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="averageScoreLabel" styleClass="stat-value" text="0.0%">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="246.0" styleClass="stat-box">
+                                             <children>
+                                                <Label text="Total Students" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="totalStudentsLabel" styleClass="stat-value" text="0">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="246.0" styleClass="stat-box">
+                                             <children>
+                                                <Label text="Total Assessments" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="totalAssessmentsLabel" styleClass="stat-value" text="0">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="400.0" prefWidth="780.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="400.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="section-title" text="Assessment Performance">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <BarChart fx:id="assessmentPerformanceChart" prefHeight="365.0" prefWidth="380.0" VBox.vgrow="ALWAYS">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis label="Score (%)" side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="400.0" prefWidth="380.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="section-title" text="Assessment Type Distribution">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <PieChart fx:id="assessmentTypeDistributionChart" prefHeight="365.0" prefWidth="380.0" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                
+                <!-- Student Performance Tab -->
+                <Tab text="Student Performance">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="521.0" prefWidth="800.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label styleClass="section-title" text="Student Performance Rankings">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TableView fx:id="studentPerformanceTable" prefHeight="200.0" prefWidth="780.0">
+                                       <columns>
+                                          <TableColumn fx:id="studentNameColumn" prefWidth="300.0" text="Student Name" />
+                                          <TableColumn fx:id="studentAssessmentCountColumn" prefWidth="150.0" text="Assessments Taken" />
+                                          <TableColumn fx:id="studentAvgScoreColumn" prefWidth="150.0" text="Average Score (%)" />
+                                       </columns>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                    <Label styleClass="section-title" text="Top Performing Students">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <BarChart fx:id="topStudentsChart" prefHeight="250.0" prefWidth="780.0" VBox.vgrow="ALWAYS">
+                                       <xAxis>
+                                          <CategoryAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis label="Average Score (%)" side="LEFT" />
+                                       </yAxis>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </BarChart>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                
+                <!-- Assessment Details Tab -->
+                <Tab text="Assessment Details">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                       <children>
+                          <VBox prefHeight="521.0" prefWidth="800.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                             <children>
+                                <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="780.0" spacing="10.0">
+                                   <children>
+                                      <Label text="Select Assessment:">
+                                         <font>
+                                            <Font name="System Bold" size="14.0" />
+                                         </font>
+                                      </Label>
+                                      <ComboBox fx:id="assessmentComboBox" prefWidth="300.0" />
+                                   </children>
+                                   <VBox.margin>
+                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                   </VBox.margin>
+                                </HBox>
+                                <HBox prefHeight="100.0" prefWidth="780.0" spacing="20.0">
+                                   <children>
+                                      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="185.0" styleClass="stat-box">
+                                         <children>
+                                            <Label text="Assessment" textAlignment="CENTER">
+                                               <font>
+                                                  <Font name="System Bold" size="14.0" />
+                                               </font>
+                                            </Label>
+                                            <Label fx:id="assessmentTitleLabel" styleClass="stat-value" text="-">
+                                               <font>
+                                                  <Font size="16.0" />
+                                               </font>
+                                            </Label>
+                                         </children>
+                                      </VBox>
+                                      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="185.0" styleClass="stat-box">
+                                         <children>
+                                            <Label text="Average Score" textAlignment="CENTER">
+                                               <font>
+                                                  <Font name="System Bold" size="14.0" />
+                                               </font>
+                                            </Label>
+                                            <Label fx:id="assessmentAvgScoreLabel" styleClass="stat-value" text="0.0%">
+                                               <font>
+                                                  <Font size="24.0" />
+                                               </font>
+                                            </Label>
+                                         </children>
+                                      </VBox>
+                                      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="185.0" styleClass="stat-box">
+                                         <children>
+                                            <Label text="Highest Score" textAlignment="CENTER">
+                                               <font>
+                                                  <Font name="System Bold" size="14.0" />
+                                               </font>
+                                            </Label>
+                                            <Label fx:id="assessmentHighScoreLabel" styleClass="stat-value" text="0.0%">
+                                               <font>
+                                                  <Font size="24.0" />
+                                               </font>
+                                            </Label>
+                                         </children>
+                                      </VBox>
+                                      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="185.0" styleClass="stat-box">
+                                         <children>
+                                            <Label text="Lowest Score" textAlignment="CENTER">
+                                               <font>
+                                                  <Font name="System Bold" size="14.0" />
+                                               </font>
+                                            </Label>
+                                            <Label fx:id="assessmentLowScoreLabel" styleClass="stat-value" text="0.0%">
+                                               <font>
+                                                  <Font size="24.0" />
+                                               </font>
+                                            </Label>
+                                         </children>
+                                      </VBox>
+                                      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="185.0" styleClass="stat-box">
+                                         <children>
+                                            <Label text="Students" textAlignment="CENTER">
+                                               <font>
+                                                  <Font name="System Bold" size="14.0" />
+                                               </font>
+                                            </Label>
+                                            <Label fx:id="assessmentStudentCountLabel" styleClass="stat-value" text="0">
+                                               <font>
+                                                  <Font size="24.0" />
+                                               </font>
+                                            </Label>
+                                         </children>
+                                      </VBox>
+                                   </children>
+                                   <VBox.margin>
+                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                   </VBox.margin>
+                                </HBox>
+                                <Label styleClass="section-title" text="Question Performance">
+                                   <font>
+                                      <Font name="System Bold" size="14.0" />
+                                   </font>
+                                   <VBox.margin>
+                                      <Insets left="10.0" top="10.0" />
+                                   </VBox.margin>
+                                </Label>
+                                <TableView fx:id="assessmentQuestionsTable" prefHeight="150.0" prefWidth="780.0">
+                                   <columns>
+                                      <TableColumn fx:id="questionTextColumn" prefWidth="300.0" text="Question" />
+                                      <TableColumn fx:id="questionTypeColumn" prefWidth="150.0" text="Type" />
+                                      <TableColumn fx:id="questionDifficultyColumn" prefWidth="100.0" text="Difficulty" />
+                                      <TableColumn fx:id="successRateColumn" prefWidth="150.0" text="Success Rate (%)" />
+                                   </columns>
+                                   <VBox.margin>
+                                      <Insets left="10.0" right="10.0" />
+                                   </VBox.margin>
+                                </TableView>
+                                <BarChart fx:id="questionPerformanceChart" prefHeight="200.0" prefWidth="780.0" VBox.vgrow="ALWAYS">
+                                   <xAxis>
+                                      <CategoryAxis side="BOTTOM" />
+                                   </xAxis>
+                                   <yAxis>
+                                      <NumberAxis label="Success Rate (%)" side="LEFT" />
+                                   </yAxis>
+                                   <VBox.margin>
+                                      <Insets bottom="10.0" left="10.0" right="10.0" />
+                                   </VBox.margin>
+                                </BarChart>
+                             </children>
+                          </VBox>
+                       </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

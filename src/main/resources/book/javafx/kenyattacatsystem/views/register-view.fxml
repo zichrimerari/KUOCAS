@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.RegisterController"
+            prefHeight="600.0" prefWidth="800.0" styleClass="login-container">
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" maxWidth="500" styleClass="login-form">
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+            </padding>
+            
+            <!-- Logo and Title -->
+            <HBox alignment="CENTER">
+                <FontIcon iconLiteral="fas-user-plus" iconSize="56" styleClass="app-icon" style="-fx-fill: #3498db;"/>
+            </HBox>
+            <Text styleClass="app-title" text="Create Your Account" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+            <Text styleClass="login-subtitle" text="Please fill in the required information" style="-fx-font-size: 14px; -fx-fill: #7f8c8d;"/>
+            
+            <!-- Registration Form -->
+            <VBox spacing="15">
+                <!-- First Name and Last Name -->
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="firstNameField" promptText="First Name" styleClass="login-field"/>
+                        <Label fx:id="firstNameError" styleClass="error-message" visible="false" wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="lastNameField" promptText="Last Name" styleClass="login-field"/>
+                        <Label fx:id="lastNameError" styleClass="error-message" visible="false" wrapText="true"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Email -->
+                <VBox spacing="5">
+                    <TextField fx:id="emailField" promptText="Email" styleClass="login-field"/>
+                    <Label fx:id="emailError" styleClass="error-message" visible="false" wrapText="true"/>
+                </VBox>
+                
+                <!-- Password and Confirm Password -->
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <PasswordField fx:id="passwordField" promptText="Password" styleClass="login-field"/>
+                        <Label fx:id="passwordError" styleClass="error-message" visible="false" wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" styleClass="login-field"/>
+                        <Label fx:id="confirmPasswordError" styleClass="error-message" visible="false" wrapText="true"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Main error/success messages -->
+            <Label fx:id="errorMessage" styleClass="error-message" visible="false" wrapText="true"/>
+            <Label fx:id="successMessage" visible="false" wrapText="true" style="-fx-text-fill: #27ae60; -fx-font-size: 13px; -fx-padding: 5px 0; -fx-background-color: rgba(39, 174, 96, 0.1); -fx-background-radius: 3px; -fx-padding: 8px;"/>
+            
+            <!-- Progress indicator -->
+            <ProgressIndicator fx:id="progressIndicator" visible="false" />
+            
+            <!-- Buttons -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button fx:id="registerButton" text="Register" onAction="#handleRegister" styleClass="login-button" prefWidth="150"/>
+                <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel" styleClass="secondary-button" prefWidth="150"/>
+            </HBox>
+            
+            <HBox alignment="CENTER" spacing="5">
+                <Text text="Already have an account?" style="-fx-fill: #7f8c8d;"/>
+                <Hyperlink text="Login" onAction="#handleCancel" style="-fx-text-fill: #3498db;"/>
+            </HBox>
+        </VBox>
+    </center>
+    
+    <bottom>
+        <HBox alignment="CENTER" spacing="5" styleClass="footer">
+            <padding>
+                <Insets bottom="10.0" top="10.0"/>
+            </padding>
+            <Text text="© 2023 Kenyatta University. All rights reserved."/>
+        </HBox>
+    </bottom>
+</BorderPane>

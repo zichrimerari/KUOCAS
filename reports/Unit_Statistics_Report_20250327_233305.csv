@@ -1,0 +1,6 @@
+unit_code,unit_name,department,staff_id,full_name,enrollment_count
+SCO104,DATABASE,CIT,,,0
+SCO100,DATACOMMUNICATION,CIT,siika,Kennedy Siika,2
+SCO106,ELECTRONICS,CIT,ojwang,Dan Ojwang,1
+UCU111,COMMUNICATION,EDUCATION,,,1
+SCO112,STATISTICS,MATHEMATICS,ojwang,Dan Ojwang,2

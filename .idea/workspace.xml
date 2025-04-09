@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d824176e-b20c-498e-99a2-abcded0c58d3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2u8yMIx4T9AyUTTvLIl9ipJgYmV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.KenyattaCatSystemApp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zichr/IdeaProjects/kenyattaCatSystem&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zichr\IdeaProjects\kenyattaCatSystem\src\main\resources\book\javafx\kenyattacatsystem\views" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d824176e-b20c-498e-99a2-abcded0c58d3" name="Changes" comment="" />
+      <created>1741644447001</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741644447001</updated>
+      <workItem from="1741644448456" duration="8000" />
+      <workItem from="1741653317849" duration="4772000" />
+      <workItem from="1741678128764" duration="10586000" />
+      <workItem from="1741753992867" duration="30000" />
+      <workItem from="1741865134264" duration="5594000" />
+      <workItem from="1741934371556" duration="13464000" />
+      <workItem from="1742021267296" duration="2144000" />
+      <workItem from="1742076515617" duration="7124000" />
+      <workItem from="1742132062001" duration="6639000" />
+      <workItem from="1742158409484" duration="2376000" />
+      <workItem from="1742197061985" duration="1474000" />
+      <workItem from="1742204008058" duration="12399000" />
+      <workItem from="1742281806340" duration="5453000" />
+      <workItem from="1742358834279" duration="1203000" />
+      <workItem from="1742371518446" duration="1201000" />
+      <workItem from="1742380300359" duration="1372000" />
+      <workItem from="1742432523652" duration="5052000" />
+      <workItem from="1742463518273" duration="11000" />
+      <workItem from="1742464233399" duration="7017000" />
+      <workItem from="1742478356433" duration="4058000" />
+      <workItem from="1742499267263" duration="3212000" />
+      <workItem from="1742555926603" duration="13169000" />
+      <workItem from="1742626892860" duration="6471000" />
+      <workItem from="1742662755742" duration="6974000" />
+      <workItem from="1742679196017" duration="640000" />
+      <workItem from="1742712537739" duration="3342000" />
+      <workItem from="1742742397001" duration="15603000" />
+      <workItem from="1742799547766" duration="22129000" />
+      <workItem from="1742878619563" duration="29768000" />
+      <workItem from="1742984173744" duration="21615000" />
+      <workItem from="1743074435033" duration="8715000" />
+      <workItem from="1743094614398" duration="8416000" />
+      <workItem from="1743112118109" duration="3959000" />
+      <workItem from="1743133893311" duration="10442000" />
+      <workItem from="1743151248165" duration="4434000" />
+      <workItem from="1743161920812" duration="4098000" />
+      <workItem from="1744235828250" duration="418000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/book/javafx/kenyattacatsystem/controllers/StudentDashboardController.java</url>
+          <line>1571</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/book/javafx/kenyattacatsystem/controllers/StudentDashboardController.java</url>
+          <line>1512</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

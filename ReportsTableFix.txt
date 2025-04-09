@@ -1,0 +1,70 @@
+// Replace the loadExistingReports method in LecturerDashboardController.java with this implementation:
+
+/**
+ * Loads existing reports from the database.
+ */
+private void loadExistingReports() {
+    try {
+        // Clear existing reports list to avoid duplicates
+        generatedReports.clear();
+        LOGGER.info("Cleared existing reports list");
+        
+        // Get the lecturer ID
+        String lecturerId = currentLecturer.getUserId();
+        LOGGER.info("Loading reports for lecturer ID: " + lecturerId);
+        
+        // Get report executions from the database using ReportService
+        List<ReportExecution> reportExecutions = ReportService.getReportExecutionsByLecturer(lecturerId);
+        LOGGER.info("Retrieved " + reportExecutions.size() + " report executions from database");
+        
+        // Convert ReportExecution objects to ReportFile objects for display
+        for (ReportExecution execution : reportExecutions) {
+            String filePath = execution.getResultFilePath();
+            if (filePath != null && !filePath.isEmpty()) {
+                File file = new File(filePath);
+                if (file.exists()) {
+                    String reportName = execution.getReportName();
+                    LocalDateTime date = execution.getExecutionDate();
+                    String fileType = getFileExtension(file).toUpperCase();
+                    
+                    ReportFile reportFile = new ReportFile(reportName, filePath, date, fileType);
+                    generatedReports.add(reportFile);
+                    LOGGER.info("Added report: " + reportName + " from execution: " + execution.getExecutionId());
+                } else {
+                    LOGGER.warning("Report file does not exist: " + filePath);
+                }
+            }
+        }
+        
+        // Refresh the table view to show the reports
+        if (reportsTableView != null) {
+            // Force refresh by setting items again
+            reportsTableView.setItems(null);
+            reportsTableView.setItems(generatedReports);
+            LOGGER.info("Refreshed reports table view with " + generatedReports.size() + " reports");
+        } else {
+            LOGGER.warning("Reports table view is null");
+        }
+    } catch (Exception e) {
+        LOGGER.log(Level.SEVERE, "Error loading existing reports", e);
+    }
+}
+
+/**
+ * Gets the file extension from a file.
+ * 
+ * @param file The file
+ * @return The file extension
+ */
+private String getFileExtension(File file) {
+    String name = file.getName();
+    int lastIndexOf = name.lastIndexOf(".");
+    if (lastIndexOf == -1) {
+        return ""; // Empty extension
+    }
+    return name.substring(lastIndexOf + 1);
+}
+
+// Don't forget to add these imports at the top of the file:
+// import book.javafx.kenyattacatsystem.models.ReportExecution;
+// import book.javafx.kenyattacatsystem.services.ReportService;

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.AdminDashboardController"
+            prefHeight="768.0" prefWidth="1024.0" styleClass="dashboard-container">
+    
+    <!-- Left Sidebar with Icon Navigation -->
+    <left>
+        <VBox styleClass="sidebar" alignment="TOP_CENTER" spacing="30.0" prefWidth="80.0">
+            <padding>
+                <Insets top="20.0" bottom="20.0"/>
+            </padding>
+            
+            <!-- App Logo -->
+            <FontIcon iconLiteral="fas-graduation-cap" iconSize="36" styleClass="sidebar-icon-active"/>
+            
+            <!-- Navigation Icons -->
+            <FontIcon fx:id="homeIcon" iconLiteral="fas-home" iconSize="24" styleClass="sidebar-icon-active" onMouseClicked="#showDashboard"/>
+            <FontIcon fx:id="usersIcon" iconLiteral="fas-users" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showUsers"/>
+            <FontIcon fx:id="unitsIcon" iconLiteral="fas-book" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showUnits"/>
+            <FontIcon fx:id="reportsIcon" iconLiteral="fas-chart-line" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showReports"/>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Settings and Logout -->
+            <FontIcon fx:id="settingsIcon" iconLiteral="fas-cog" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#showSettings"/>
+            <FontIcon iconLiteral="fas-sign-out-alt" iconSize="24" styleClass="sidebar-icon" onMouseClicked="#handleLogout"/>
+        </VBox>
+    </left>
+    
+    <!-- Main Content Area -->
+    <center>
+        <StackPane>
+            <!-- Dashboard Content (Overview) -->
+            <VBox fx:id="dashboardContent" spacing="20.0" visible="true">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <VBox>
+                        <Text styleClass="app-title" text="Admin Dashboard"/>
+                        <Text fx:id="welcomeText" styleClass="welcome-text" text="Welcome, Admin"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox alignment="CENTER_RIGHT">
+                        <Label fx:id="dateTimeLabel" styleClass="date-time-label" text="Thursday, March 20, 2025 1:26 PM"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Stats Cards -->
+                <HBox spacing="20.0">
+                    <!-- Total Users -->
+                    <VBox styleClass="stat-card">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <FontIcon iconLiteral="fas-users" iconSize="24" styleClass="stat-icon"/>
+                            <VBox>
+                                <Text styleClass="stat-title" text="Total Users"/>
+                                <Text fx:id="totalUsersLabel" styleClass="stat-value" text="0"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                    
+                    <!-- Total Units -->
+                    <VBox styleClass="stat-card">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <FontIcon iconLiteral="fas-book" iconSize="24" styleClass="stat-icon"/>
+                            <VBox>
+                                <Text styleClass="stat-title" text="Total Units"/>
+                                <Text fx:id="totalUnitsLabel" styleClass="stat-value" text="0"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                    
+                    <!-- Total Students -->
+                    <VBox styleClass="stat-card">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <FontIcon iconLiteral="fas-user-graduate" iconSize="24" styleClass="stat-icon"/>
+                            <VBox>
+                                <Text styleClass="stat-title" text="Total Students"/>
+                                <Text fx:id="totalStudentsLabel" styleClass="stat-value" text="0"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                    
+                    <!-- Total Lecturers -->
+                    <VBox styleClass="stat-card">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <FontIcon iconLiteral="fas-chalkboard-teacher" iconSize="24" styleClass="stat-icon"/>
+                            <VBox>
+                                <Text styleClass="stat-title" text="Total Lecturers"/>
+                                <Text fx:id="totalLecturersLabel" styleClass="stat-value" text="0"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Users Content -->
+            <VBox fx:id="usersContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Text styleClass="app-title" text="Users Management"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ComboBox promptText="Filter by Role"/>
+                    <Button text="Add User" styleClass="primary-button" onAction="#addUser"/>
+                </HBox>
+                
+                <!-- Users Table -->
+                <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="userIdColumn" text="ID" prefWidth="100.0"/>
+                        <TableColumn fx:id="userNameColumn" text="Name" prefWidth="200.0"/>
+                        <TableColumn fx:id="userEmailColumn" text="Email" prefWidth="250.0"/>
+                        <TableColumn fx:id="userRoleColumn" text="Role" prefWidth="100.0"/>
+                        <TableColumn fx:id="userActionColumn" text="Actions" prefWidth="150.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Units Content -->
+            <VBox fx:id="unitsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Text styleClass="app-title" text="Units Management"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="unitDepartmentFilterComboBox" promptText="Filter by Department"/>
+                    <Button text="Add Unit" styleClass="primary-button" onAction="#addUnit"/>
+                </HBox>
+                
+                <!-- Units Table -->
+                <TableView fx:id="unitsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="unitCodeColumn" text="Code" prefWidth="100.0"/>
+                        <TableColumn fx:id="unitNameColumn" text="Title" prefWidth="250.0"/>
+                        <TableColumn fx:id="unitDepartmentColumn" text="Department" prefWidth="150.0"/>
+                        <TableColumn fx:id="unitActionColumn" text="Actions" prefWidth="150.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Settings Content -->
+            <VBox fx:id="settingsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Text styleClass="app-title" text="System Settings"/>
+                </HBox>
+                
+                <!-- Settings Form -->
+                <GridPane hgap="20.0" vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150.0" prefWidth="200.0"/>
+                        <ColumnConstraints prefWidth="300.0"/>
+                    </columnConstraints>
+                    
+                    <!-- System Name -->
+                    <Label text="System Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="systemNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    
+                    <!-- Academic Year -->
+                    <Label text="Academic Year:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="academicYearField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    
+                    <!-- Session Timeout -->
+                    <Label text="Session Timeout (minutes):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="sessionTimeoutField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    
+                    <!-- Min Password Length -->
+                    <Label text="Minimum Password Length:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="minPasswordLengthField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    
+                    <!-- Password Complexity -->
+                    <Label text="Password Complexity:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="passwordComplexityComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <!-- Account Lockout -->
+                    <Label text="Account Lockout (attempts):" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="accountLockoutField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    
+                    <!-- Max Units Per Semester -->
+                    <Label text="Max Units Per Semester:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <TextField fx:id="maxUnitsPerSemesterField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    
+                    <!-- Require Fee Clearance -->
+                    <Label text="Require Fee Clearance:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <CheckBox fx:id="requireFeeClearanceCheckbox" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                </GridPane>
+                
+                <!-- Save Button -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <Button text="Save Settings" styleClass="primary-button" onAction="#saveEnrollmentSettings"/>
+                </HBox>
+            </VBox>
+            
+            <!-- Reports Content -->
+            <VBox fx:id="reportsContent" spacing="20.0" visible="false">
+                <padding>
+                    <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <Text styleClass="app-title" text="Reports"/>
+                </HBox>
+                
+                <!-- Report Filters -->
+                <GridPane hgap="20.0" vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150.0" prefWidth="200.0"/>
+                        <ColumnConstraints prefWidth="300.0"/>
+                    </columnConstraints>
+                    
+                    <!-- Report Type -->
+                    <Label text="Report Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="reportTypeComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <!-- Date Range -->
+                    <Label text="Start Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="startDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <Label text="End Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="endDatePicker" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <!-- Filters -->
+                    <Label text="Unit:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="reportUnitFilterComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <Label text="Department:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="reportDepartmentFilterComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <Label text="Role:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="reportRoleFilterComboBox" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="300.0"/>
+                    
+                    <Label text="Format:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="reportFormatComboBox" GridPane.rowIndex="6" GridPane.columnIndex="1" prefWidth="300.0"/>
+                </GridPane>
+                
+                <!-- Generate Button -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <Button text="Generate Report" styleClass="primary-button" onAction="#generateReport"/>
+                </HBox>
+                
+                <!-- Report Executions Table -->
+                <TableView fx:id="reportExecutionsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="executionDateColumn" text="Date" prefWidth="150.0"/>
+                        <TableColumn fx:id="executedByColumn" text="Generated By" prefWidth="150.0"/>
+                        <TableColumn fx:id="reportNameColumn" text="Report" prefWidth="250.0"/>
+                        <TableColumn fx:id="downloadColumn" text="Download" prefWidth="150.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

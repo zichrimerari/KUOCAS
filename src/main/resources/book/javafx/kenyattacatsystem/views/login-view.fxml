@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.LoginController"
+            prefHeight="600.0" prefWidth="800.0" styleClass="login-container">
+
+    <left>
+        <VBox alignment="CENTER" styleClass="login-branding-panel" prefWidth="350">
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+            </padding>
+
+            <ImageView fitWidth="120" fitHeight="120" preserveRatio="true">
+                <Image url="@../images/ku_logo.svg" />
+            </ImageView>
+
+            <Text styleClass="branding-title" text="Kenyatta University" />
+            <Text styleClass="branding-subtitle" text="Continuous Assessment System" />
+
+            <VBox styleClass="feature-list" spacing="15" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="40.0" />
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="feature-item">
+                    <FontIcon iconLiteral="fas-check-circle" iconSize="16" />
+                    <Text text="Secure online assessments" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="feature-item">
+                    <FontIcon iconLiteral="fas-check-circle" iconSize="16" />
+                    <Text text="Real-time results and feedback" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="feature-item">
+                    <FontIcon iconLiteral="fas-check-circle" iconSize="16" />
+                    <Text text="Accessible from anywhere" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" spacing="20.0" maxWidth="350" styleClass="login-form-container">
+                <padding>
+                    <Insets bottom="30.0" left="40.0" right="40.0" top="30.0"/>
+                </padding>
+
+                <Text styleClass="login-form-title" text="Sign In" />
+                <Text styleClass="login-form-subtitle" text="Welcome back! Please enter your details." />
+
+                <VBox spacing="5">
+                    <Label text="Username" styleClass="field-label" />
+                    <TextField fx:id="usernameField" promptText="Enter your username" styleClass="login-field"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Password" styleClass="field-label" />
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="login-field"/>
+                </VBox>
+
+
+                <Label fx:id="errorMessage" styleClass="error-message" visible="false" wrapText="true" />
+
+                <Button fx:id="loginButton" text="Sign In" onAction="#handleLogin" styleClass="login-button" maxWidth="Infinity" />
+
+                <HBox alignment="CENTER" spacing="5">
+                    <Text text="Don't have an account?" styleClass="text-muted" />
+                    <Hyperlink text="Register" onAction="#handleRegister" styleClass="register-link" />
+                </HBox>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="5" styleClass="footer">
+            <padding>
+                <Insets bottom="10.0" top="10.0"/>
+            </padding>
+            <Text text="© 2023 Kenyatta University. All rights reserved." styleClass="footer-text" />
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="book.javafx.kenyattacatsystem.controllers.AssessmentTakingController"
+            prefHeight="768.0" prefWidth="1024.0" styleClass="assessment-container">
+    
+    <!-- Header with Assessment Information -->
+    <top>
+        <VBox spacing="10.0" styleClass="assessment-header">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+            
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <Text fx:id="assessmentTitleText" styleClass="app-title" text="Assessment Title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="timerLabel" styleClass="timer-label" text="Time Remaining: 00:00:00"/>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Unit:" styleClass="assessment-info-label"/>
+                <Label fx:id="unitLabel" text="Unit Code - Unit Name"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Total Questions:" styleClass="assessment-info-label"/>
+                <Label fx:id="totalQuestionsLabel" text="0"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Total Marks:" styleClass="assessment-info-label"/>
+                <Label fx:id="totalMarksLabel" text="0"/>
+            </HBox>
+            
+            <Separator/>
+        </VBox>
+    </top>
+    
+    <!-- Main Content Area with Questions -->
+    <center>
+        <BorderPane>
+            <!-- Question Navigation Sidebar -->
+            <left>
+                <VBox spacing="10.0" styleClass="question-nav" prefWidth="150.0">
+                    <padding>
+                        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+                    </padding>
+                    
+                    <Label text="Questions" styleClass="section-header"/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="questionNavContainer" spacing="5.0"/>
+                    </ScrollPane>
+                </VBox>
+            </left>
+            
+            <!-- Current Question Display -->
+            <center>
+                <ScrollPane fitToWidth="true" styleClass="transparent-background">
+                    <VBox spacing="20.0" styleClass="question-container">
+                        <padding>
+                            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+                        </padding>
+                        
+                        <!-- Question Number and Marks -->
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label fx:id="questionNumberLabel" text="Question 1" styleClass="question-number"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="questionMarksLabel" text="(2 marks)" styleClass="question-marks"/>
+                        </HBox>
+                        
+                        <!-- Question Text -->
+                        <Text fx:id="questionTextLabel" styleClass="question-text" text="Question text goes here..." wrappingWidth="800"/>
+                        
+                        <!-- Answer Area (will be populated dynamically based on question type) -->
+                        <VBox fx:id="answerContainer" spacing="10.0">
+                            <!-- For Multiple Choice -->
+                            <VBox fx:id="multipleChoiceContainer" spacing="10.0" visible="false">
+                                <RadioButton text="Option A" toggleGroup="$answerGroup"/>
+                                <RadioButton text="Option B" toggleGroup="$answerGroup"/>
+                                <RadioButton text="Option C" toggleGroup="$answerGroup"/>
+                                <RadioButton text="Option D" toggleGroup="$answerGroup"/>
+                            </VBox>
+                            
+                            <!-- For Short Answer -->
+                            <VBox fx:id="shortAnswerContainer" spacing="10.0" visible="false">
+                                <Label text="Your Answer:" />
+                                <TextField fx:id="shortAnswerField" promptText="Type your answer here..."/>
+                            </VBox>
+                            
+                            <!-- For List Based -->
+                            <VBox fx:id="listBasedContainer" spacing="10.0" visible="false">
+                                <Label text="Your Answers (comma-separated):" />
+                                <TextArea fx:id="listAnswerField" promptText="Type your answers here, separated by commas..." wrapText="true"/>
+                            </VBox>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </center>
+    
+    <!-- Bottom Navigation Buttons -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="20.0" styleClass="assessment-footer">
+            <padding>
+                <Insets top="15.0" right="20.0" bottom="15.0" left="20.0"/>
+            </padding>
+            
+            <Button fx:id="previousButton" text="Previous" onAction="#handlePreviousQuestion" styleClass="nav-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="saveButton" text="Save Answer" onAction="#handleSaveAnswer" styleClass="primary-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="nextButton" text="Next" onAction="#handleNextQuestion" styleClass="nav-button"/>
+            <Button fx:id="submitButton" text="Submit Assessment" onAction="#handleSubmitAssessment" styleClass="submit-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

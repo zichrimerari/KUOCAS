@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="book.javafx.kenyattacatsystem.controllers.FocusTrackingDetailController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    
+    <Text fx:id="studentInfoText" styleClass="section-header" text="Focus Tracking Details" />
+    
+    <TableView fx:id="eventsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="timestampColumn" text="Timestamp" prefWidth="150" />
+            <TableColumn fx:id="eventTypeColumn" text="Event Type" prefWidth="100" />
+            <TableColumn fx:id="durationColumn" text="Duration" prefWidth="100" />
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="closeButton" text="Close" onAction="#handleClose" />
+    </HBox>
+</VBox>
